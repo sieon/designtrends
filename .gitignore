@@ -1,0 +1,9 @@
+
+*.scssc
+*.sass-cache
+node_modules
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/writing.iml
+.idea/inspectionProfiles/profiles_settings.xml
