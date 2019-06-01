@@ -41,6 +41,8 @@ $container   = get_theme_mod( 'leantheme_container_type' );
 
 				<?php endwhile; // end of the loop. ?>
 
+				<?php related_logos(); ?>
+
 			</main><!-- #main -->
 		</div><!-- #primary -->
 

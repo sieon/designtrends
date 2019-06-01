@@ -11,14 +11,6 @@ $the_theme = wp_get_theme();
 $container = get_theme_mod( 'leantheme_container_type' );
 ?>
 
-<?php if(is_singular( 'post' )): ?>
-	<div class="wrapper">
-		<div class="container">
-			<?php related_posts(); ?>
-		</div>
-	</div>
-<?php endif; ?>
-
 <?php get_sidebar( 'footerfull' ); ?>
 
 <div class="wrapper" id="wrapper-footer">

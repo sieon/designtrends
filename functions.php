@@ -79,3 +79,4 @@ require get_template_directory() . '/inc/widget-post-plus.php';
  * Load related Post Widget functions.
  */
 require get_template_directory() . '/inc/related-posts.php';
+require get_template_directory() . '/inc/related-posts-logo.php';

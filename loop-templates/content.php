@@ -8,7 +8,7 @@
 ?>
 
 <div class="col-lg-3 col-md-4 col-6">
-	<article <?php post_class('card card-entry l-shadow-v7 border-0 mb-3'); ?> id="post-<?php the_ID(); ?>">
+	<article <?php post_class('card shadow-sm mb-4'); ?> id="post-<?php the_ID(); ?>">
 
 		<?php //echo get_the_post_thumbnail( $post->ID, 'large' ); ?>
 
@@ -31,8 +31,8 @@
 
 		<div class="card-body">
 
-			<?php the_title( sprintf( '<h2 class="card-entry-title"><a class="text-dark" href="%s" rel="bookmark">', esc_url( get_permalink() ) ),
-			'</a></h2>' ); ?>
+			<?php the_title( sprintf( '<h3 class="h5"><a class="text-dark" href="%s" rel="bookmark">', esc_url( get_permalink() ) ),
+			'</a></h3>' ); ?>
 
 			<?php if ( 'post' == get_post_type() ) : ?>
 

@@ -9,34 +9,26 @@
 <article <?php post_class('card card-single border-0'); ?> id="post-<?php the_ID(); ?>">
 
 	<?php if( has_post_thumbnail() ) : ?>
-		<div class="card mb-4">
-			<?php the_post_thumbnail( 'full', ['class' => 'card-img'] ); ?>
-			<div class="card-img-overlay-bottom card-overlay-featured text-white lt-link-color">
-				<div class="post-categories mb-3">
-					<i class="fa fa-archive mr-1"></i>
-					<?php
-					$categories = get_the_category();
-					$separator = ' ';
-					$output = '';
-					if ( ! empty( $categories ) ) {
-						foreach( $categories as $category ) {
-							$output .= '<a class="" href="' . esc_url( get_category_link( $category->term_id ) ) . '" alt="' . esc_attr( sprintf( __( 'View all posts in %s', 'leantheme' ), $category->name ) ) . '">' . esc_html( $category->name ) . '</a>' . $separator;
-						}
-						echo trim( $output, $separator );
-					}
-					?>
-				</div>
-				<?php the_title( '<h1>', '</h1>' ); ?>
-				<div class="mt-3"><?php leantheme_posted_on(); ?></div>
-			</div>
-		</div>
+		<?php the_post_thumbnail( 'full', ['class' => 'card-img border mb-4'] ); ?>
+	<?php endif; ?>
 
-	<?php else: // no thumbnail ?>
 		<div class="post-header mb-4">
 			<?php the_title( '<h1>', '</h1>' ); ?>
-			<div class="text-muted lt-link-color-dark mt-4"><?php leantheme_posted_on(); ?></div>
+			<div class="text-muted lt-link-color-dark"><?php leantheme_posted_on(); ?>
+				<i class="fa fa-archive mr-1"></i>
+				<?php
+				$categories = get_the_category();
+				$separator = ' ';
+				$output = '';
+				if ( ! empty( $categories ) ) {
+					foreach( $categories as $category ) {
+						$output .= '<a class="" href="' . esc_url( get_category_link( $category->term_id ) ) . '" alt="' . esc_attr( sprintf( __( 'View all posts in %s', 'leantheme' ), $category->name ) ) . '">' . esc_html( $category->name ) . '</a>' . $separator;
+					}
+					echo trim( $output, $separator );
+				}
+				?>
+			</div>
 		</div>
-	<?php endif; ?>
 
 	<div class="card-content">
 

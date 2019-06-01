@@ -39,7 +39,7 @@ $container = get_theme_mod( 'leantheme_container_type' );
 
 		<a class="skip-link screen-reader-text sr-only" href="#content"><?php esc_html_e( 'Skip to content', 'leantheme' ); ?></a>
 
-		<nav class="navbar navbar-expand-md navbar-light bg-white l-shadow-v7 fixed-top">
+		<nav class="navbar navbar-expand-md navbar-dark bg-primary static-top">
 
 		<?php if ( 'container' == $container ) : ?>
 			<div class="container" >

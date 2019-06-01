@@ -1,6 +1,6 @@
 <?php
 
-function related_posts( $post_num = 4 ) {
+function related_posts( $post_num = 20 ) {
 	global $post;
     echo '<div class="w-100 mb-4"><h3 class="h6 d-inline-block py-2 l-title-v0 mb-3">你可能喜欢：</h3><div class="row">';
     $exclude_id = $post->ID;
@@ -8,36 +8,19 @@ function related_posts( $post_num = 4 ) {
     if ( $posttags ) {
         $tags = ''; foreach ( $posttags as $tag ) $tags .= $tag->term_id . ',';
         $args = array(
+					'post_type' => "logo",
           'post_status' => 'publish',
           'tag__in' => explode(',', $tags),
           'post__not_in' => explode(',', $exclude_id),
           'ignore_sticky_posts' => 1,
           'orderby' => 'comment_date',
-          'posts_per_page' => $post_num,
-					'tax_query' => array(
-						array(
-	            'taxonomy' => 'post_format',
-	            'field' => 'slug',
-	            'terms' => array(
-	                'post-format-aside',
-	                //'post-format-audio',
-	                //'post-format-chat',
-	                //'post-format-gallery',
-	                //'post-format-image',
-	                'post-format-link',
-	                //'post-format-quote',
-	                'post-format-status',
-	                //'post-format-video'
-	            ),
-	            'operator' => 'NOT IN'
-	          )
-					)
+          'posts_per_page' => $post_num
 				);
         query_posts($args);
         while( have_posts() ) { the_post(); ?>
 
 					<div class="col-lg-3">
-						<article <?php post_class('card border-0 h-100 l-shadow-v4'); ?> id="post-<?php the_ID(); ?>">
+						<article <?php post_class('card'); ?> id="post-<?php the_ID(); ?>">
 
 							<div class="card-img-top">
 								<?php if( has_post_thumbnail() ) : ?>
@@ -68,37 +51,21 @@ function related_posts( $post_num = 4 ) {
 		wp_reset_query();
     }
     if ( $i < $post_num ) {
-        $cats = ''; foreach ( get_the_category() as $cat ) $cats .= $cat->cat_ID . ',';
+        $terms = '';
+				foreach ( get_terms() as $term ) $terms .= $term->term_ID . ',';
         $args = array(
-          'category__in' => explode(',', $cats),
+					'post_type' => "logo",
+          'term__in' => explode(',', $terms),
           'post__not_in' => explode(',', $exclude_id),
           'ignore_sticky_posts' => 1,
           'orderby' => 'comment_date',
-          'posts_per_page' => $post_num - $i,
-					'tax_query' => array(
-						array(
-	            'taxonomy' => 'post_format',
-	            'field' => 'slug',
-	            'terms' => array(
-	                'post-format-aside',
-	                //'post-format-audio',
-	                //'post-format-chat',
-	                //'post-format-gallery',
-	                //'post-format-image',
-	                'post-format-link',
-	                //'post-format-quote',
-	                'post-format-status',
-	                //'post-format-video'
-	            ),
-	            'operator' => 'NOT IN'
-	          )
-					)
+          'posts_per_page' => $post_num - $i
 				);
         query_posts($args);
-        while( have_posts() ) { the_post(); ?>
+        while( have_posts() ) { the_post(); echo wp_get_post_terms(get); ?>
 
 					<div class="col-lg-3">
-						<article <?php post_class('card border-0 l-shadow-v4 h-100'); ?> id="post-<?php the_ID(); ?>">
+						<article <?php post_class('card'); ?> id="post-<?php the_ID(); ?>">
 
 							<div class="card-img-top">
 								<?php if( has_post_thumbnail() ) : ?>

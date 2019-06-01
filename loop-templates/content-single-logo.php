@@ -6,38 +6,43 @@
  */
 
 ?>
-<article <?php post_class('card card-single border-0'); ?> id="post-<?php the_ID(); ?>">
+<article <?php post_class('row mb-3'); ?> id="post-<?php the_ID(); ?>">
+	<div class="col-md-5">
+		<?php if( has_post_thumbnail() ) : ?>
+			<?php the_post_thumbnail( 'full', ['class' => 'card-img border'] ); ?>
+		<?php endif; ?>
+	</div>
+	<div class="col-md-7">
+		<div class="post-header mb-3">
 
-	<?php if( has_post_thumbnail() ) : ?>
+			<?php the_title( '<h1 class="h4 mb-4">', '</h1>' ); ?>
 
-		<?php the_post_thumbnail( 'full', ['class' => 'img-thumbnail mb-3'] ); ?>
-
-	<?php endif; ?>
-
-		<div class="post-header mb-4">
-
-			<?php the_title( '<h1>', '</h1>' ); ?>
-
-			<div class="text-muted lt-link-color-dark mt-4">
-				<?php the_author(); ?> 于 <?php echo esc_html( get_the_date() ); ?> 发表在 <?php the_terms( $post->ID, 'industry', '', ' / ' ); ?>
-			</div>
+			<ul class="list-unstyled">
+				<li>发布者：<?php the_author(); ?></li>
+				<li>发布时间：<?php echo esc_html( get_the_date() ); ?></li>
+				<li>行业：<?php the_terms( $post->ID, 'industry', '', ' / ' ); ?></li>
+				<li><?php the_tags(); ?></li>
+			</ul>
 		</div>
 
-	<div class="card-content">
-
-		<?php the_content(); ?>
-
-		<?php
-		wp_link_pages( array(
-			'before' => '<div class="page-links">' . __( 'Pages:', 'leantheme' ),
-			'after'  => '</div>',
-		) );
-		?>
+		<div class="card-content">
+			<?php the_excerpt(); ?>
+		</div>
 
 	</div>
-
-	<footer class="card-tags mt-4">
-		<?php leantheme_entry_tags(); ?>
-	</footer>
-
 </article>
+
+<hr>
+
+<div class="card-content">
+
+	<?php the_content(); ?>
+
+	<?php
+	wp_link_pages( array(
+		'before' => '<div class="page-links">' . __( 'Pages:', 'leantheme' ),
+		'after'  => '</div>',
+	) );
+	?>
+
+</div>
