@@ -164,12 +164,14 @@ add_action( 'save_post',     'leantheme_category_transient_flusher' );
 
 
 function add_custom_types( $query ) {
-    if( is_tag() || is_home() && $query->is_main_query() ) {
-        //获取所有的自定义内容类型
-        //$post_types = get_post_types();
-				$post_types = array('post','logo');
-        //重置query
-        $query->set( 'post_type', $post_types );
-    }
+  if( is_tag() || is_home() || is_category() ) {
+		if ( $query->is_main_query() ) {
+			//获取所有的自定义内容类型
+			//$post_types = get_post_types();
+			$post_types = array('post','logo');
+			//重置query
+			$query->set( 'post_type', $post_types );
+		}
+  }
 }
 add_filter( 'pre_get_posts', 'add_custom_types' );

@@ -32,8 +32,6 @@
 
 	<div class="card-content">
 
-
-
 		<?php the_content(); ?>
 
 		<?php

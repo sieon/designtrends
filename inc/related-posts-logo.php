@@ -22,7 +22,7 @@ function related_logos( $post_num = 20 ) {
         query_posts($args);
         while( have_posts() ) { the_post(); ?>
 
-					<div class="col-lg-4 mb-4">
+					<div class="col-lg-3 col-md-4 col-6 mb-4">
 						<article <?php post_class('card shadow-sm'); ?> id="post-<?php the_ID(); ?>">
 
 							<div class="card-img-top">
@@ -55,26 +55,27 @@ function related_logos( $post_num = 20 ) {
     }
     if ( $i < $post_num ) {
         $terms = '';
-				foreach ( get_the_terms($post->ID, 'industry') as $term ) $terms .= $term->term_id . ',';
+				foreach ( get_the_terms($post->ID, 'category') as $term ) $terms .= $term->term_id . ',';
         $args = array(
 					'post_type' => "logo",
           'post__not_in' => explode(',', $exclude_id),
           'ignore_sticky_posts' => 1,
           'orderby' => 'comment_date',
-					'tax_query' => array(
-						array(
-							'taxonomy' => 'industry',
-							'field' => 'term_id',
-							'terms' => $terms
-						)
-					),
+					'category__in' => $terms,
+					// 'tax_query' => array(
+					// 	array(
+					// 		'taxonomy' => 'industry',
+					// 		'field' => 'term_id',
+					// 		'terms' => $terms
+					// 	)
+					// ),
           'posts_per_page' => $post_num - $i
 				);
         query_posts($args);
 
         while( have_posts() ) { the_post(); ?>
 
-					<div class="col-lg-3 mb-4">
+					<div class="col-lg-3 col-md-4 col-6 mb-4">
 						<article <?php post_class('card shadow-sm'); ?> id="post-<?php the_ID(); ?>">
 
 							<div class="card-img-top">

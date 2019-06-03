@@ -13,45 +13,32 @@ $container   = get_theme_mod( 'leantheme_container_type' );
 
 	<div class="<?php echo esc_attr( $container ); ?>" id="content" tabindex="-1">
 
-		<div class="row justify-content-center">
+		<main class="site-main" id="main">
 
-			<!-- Do the left sidebar check -->
-			<?php get_template_part( 'global-templates/left-sidebar-check' ); ?>
+			<?php
+				if ( function_exists('yoast_breadcrumb') ) {
+					yoast_breadcrumb( '<nav id="breadcrumbs" class="mb-3">','</nav>' );
+				}
+			?>
 
-			<main class="site-main" id="main">
+			<?php while ( have_posts() ) : the_post(); ?>
+
+				<?php get_template_part( 'loop-templates/content', 'single-logo' ); ?>
+
+					<?php leantheme_post_nav(); ?>
 
 				<?php
-					if ( function_exists('yoast_breadcrumb') ) {
-					  yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
-					}
+				// If comments are open or we have at least one comment, load up the comment template.
+				if ( comments_open() || get_comments_number() ) :
+					comments_template();
+				endif;
 				?>
 
-				<?php while ( have_posts() ) : the_post(); ?>
+			<?php endwhile; // end of the loop. ?>
 
-					<?php get_template_part( 'loop-templates/content', 'single-logo' ); ?>
+			<?php related_logos(); ?>
 
-						<?php leantheme_post_nav(); ?>
-
-					<?php
-					// If comments are open or we have at least one comment, load up the comment template.
-					if ( comments_open() || get_comments_number() ) :
-						comments_template();
-					endif;
-					?>
-
-				<?php endwhile; // end of the loop. ?>
-
-				<?php related_logos(); ?>
-
-			</main><!-- #main -->
-		</div><!-- #primary -->
-
-			<!-- Do the right sidebar check -->
-			<?php get_template_part( 'global-templates/right-sidebar-check' ); ?>
-
-		</div><!-- #primary -->
-
-	</div><!-- .row -->
+		</main><!-- #main -->
 
 </div><!-- Container end -->
 
