@@ -47,6 +47,7 @@
 
 			</footer><!-- .entry-footer -->
 
+<?php edit_post_link(); ?>
 		</div>
 	</article><!-- #post-## -->
 </div>
